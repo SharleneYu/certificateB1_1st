@@ -35,17 +35,16 @@
 				</div>
 			</div>
 
-	<?php
-	$do= $_GET['do']??'main';
-	$file="./view/front/".$do.".php";
-
-	if(file_exists($file)){
-		include $file;
-	}else{
-		include "./view/front/main.php";
-	}
-
-	?>
+			<?php
+				$do=$_GET['do']??'main';
+				$file="./view/front/".$do.".php";
+				if(file_exists($file)){
+					include $file;
+				}else{
+					include "./view/front/main.php";
+				}
+			?>
+			
 			
 			<div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
 				<!--右邊-->

@@ -1,15 +1,14 @@
-<?php
-//將DB.php中的class DB繼承為不同功能用的class
+<?php  include_once "DB.php";
 
-include_once "DB.php";
-
-// 
 class Image extends DB{
 
-    function __construct()
-    {
+    function __construct(){
         parent::__construct('image');
     }
+
+
+
+
 
 }
 
