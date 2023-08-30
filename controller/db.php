@@ -1,6 +1,7 @@
 <?php
 class DB{
 
+    //STEP1
     protected $table;
     protected $pdo;
     protected $dsn="mysql: host=localhost; charset=utf8; dbname=db01";
@@ -11,47 +12,56 @@ class DB{
         $this->pdo=new PDO($this->dsn, 'root', '');
     }
 
-    //STEP2: protected function用來組SQL字串
-    protected function a2s($array){
-        foreach($array as $key=>$value){
-            if($key!='id'){
-                $tmp[]="`$key`='$value'";
-            }
-        }
-        return $tmp;
-    }
 
-    //提供給all(), count() 接用
-    protected function sql_all($sql, ...$arg){
-        if(isset($arg[0])){
-            if(is_array($arg[0])){
-                $tmp=$this->a2s($arg[0]);
-                $sql = $sql . " WHERE ".join(" && ",$tmp);
-            }else{
-                $sql=$sql . $arg[0];
-            }
+//STEP2: protected function用來組SQL字串
+protected function a2s($array){
+    foreach($array as $key=>$value){
+        if($key!='id'){
+            $tmp[]="`$key`='$value'";
         }
-        if(isset($arg[1])){
-            $sql=$sql . $arg[1];
+    }
+    return $tmp;
+}
+
+//提供給all(), count() 接用
+protected function sql_all($sql, ...$arg){
+    if(isset($arg[0])){
+
+        if(is_array($arg[0])){
+            $tmp=$this->a2s($arg[0]);
+            $sql = $sql . " WHERE ".join(" && ",$tmp);
+        }else{
+            $sql=$sql . $arg[0];
         }
-        return $sql;
     }
-    
-    protected function sql_one($sql,...$arg){
-    
+    if(isset($arg[1])){
+        $sql=$sql . $arg[1];
     }
+    return $sql;
+}
 
-    protected function math($math, $col, ...$arg){
-        $sql= " SELECT $math($col) FROM $this->table ";
-        $sql = $this->sql_all($sql, ...$arg);
-        return $this->pdo->query($sql)->fetchColumn();
+protected function sql_one($sql,$arg){
+    if(is_array($arg)){
+        $tmp=$this->a2s($arg);
+        $sql = $sql . " WHERE " . join(" && ",$tmp);
+    }else{
+        $sql = $sql. " WHERE `id`='$arg' ";
     }
+    return $sql;
+}
+
+protected function math($math, $col, ...$arg){
+    $sql= " SELECT $math($col) FROM $this->table ";
+    $sql = $this->sql_all($sql, ...$arg);
+    return $this->pdo->query($sql)->fetchColumn();
+}
 
     
+    //STEP3
     function all(...$arg){
         $sql=" SELECT * FROM $this->table ";
         $sql= $this->sql_all($sql, ...$arg);
-        return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function count(...$arg){
@@ -74,9 +84,8 @@ class DB{
 
     function save($arg){
         if(isset($arg['id'])){
-            $sql= " UPDATE $this->table SET ";
             $tmp=$this->a2s($arg);
-            $sql= $sql . join(",",$tmp);
+            $sql = " UPDATE $this->table SET " .join(",",$tmp);
             $sql=$sql . " WHERE `id`='{$arg['id']}' ";
         }else{
             $keys=join("`,`",array_keys($arg));
@@ -87,14 +96,8 @@ class DB{
     }
 
     function del($arg){
-        $sql = " DELETE * FROM $this->table ";
-
-        if(is_array($arg)){
-            $tmp=$this->a2s($arg);
-            $sql = $sql. " WHERE ".join(" && ",$tmp);
-        }else{
-            $sql= $sql. " WHERE `id`=$arg";
-        }
+        $sql =  " DELETE FROM $this->table ";
+        $sql =  $this->sql_one($sql, $arg);
         return $this->pdo->exec($sql);
     }
 
@@ -157,6 +160,10 @@ class DB{
         }
 
     }
+
+
+
+
 
 }
 

@@ -1,7 +1,5 @@
 <?php  include_once "DB.php";
 
-
-
 class Title extends DB{
 
     function __construct(){
@@ -13,7 +11,9 @@ class Title extends DB{
                 'table'=>$this->table,
                 'rows'=>$this->all(),
                 'addBtn'=>'新增網站標題圖片',
-                'modal'=> "./view/modal/title.php"
+                'modal'=> "./view/modal/title.php",
+                'updateModal'=>"./view/modal/updateTitle.php",
+                'updateBtn'=>"更新圖片"
               ];
         return $this->view('./view/backend/title.php', $view);
     }

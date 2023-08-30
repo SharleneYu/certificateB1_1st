@@ -6,7 +6,7 @@ class Mvim extends DB{
 
     function __construct(){
         parent::__construct('mvim');
-        echo "hi";
+     
 
     }
 

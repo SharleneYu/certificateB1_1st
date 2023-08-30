@@ -16,53 +16,53 @@
 <body>
 	<div id="cover" style="display:none; ">
 		<div id="coverr">
-			<a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;" onclick="cl(&#39;#cover&#39;)">X</a>
+			<a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;" onclick="cl('#cover')">X</a>
 			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"></div>
 		</div>
 	</div>
 	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
 		<a title="" href="?">
-			<div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;"></div><!--標題-->
+			<div class="ti" style="background:url('use/'); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">後台管理選單</span>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="./Management page_files/Management page.htm">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=title">
 						<div class="mainmu">
 							網站標題管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=ad">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=ad">
 						<div class="mainmu">
 							動態文字廣告管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=mvim">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=mvim">
 						<div class="mainmu">
 							動畫圖片管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=image">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=image">
 						<div class="mainmu">
 							校園映象資料管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=total">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=total">
 						<div class="mainmu">
 							進站總人數管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=bottom">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=bottom">
 						<div class="mainmu">
 							頁尾版權資料管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=news">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=news">
 						<div class="mainmu">
 							最新消息資料管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=admin">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin">
 						<div class="mainmu">
 							管理者帳號管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=menu">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=menu">
 						<div class="mainmu">
 							選單管理 </div>
 					</a>
@@ -81,21 +81,16 @@
 						<tr>
 							<td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a>
 							</td>
-							<td><button onclick="document.cookie=&#39;user=&#39;;location.replace(&#39;?&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+							<td><button onclick="document.cookie='user=';location.replace('?')" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
 						</tr>
 					</tbody>
 				</table>
 				<?php
-				$do = $_GET['do'] ?? 'title';
+				$do=$_GET['do']??'title';
 				$file = "./view/backend/". $do .".php";
 				$table=ucfirst($do);
 				$$table->backend();
-
-				if (file_exists($file)) {
-					include $file;
-				} else {
-					include "./view/backend/title.php";
-				}
+				
 				?>
 			</div>
 

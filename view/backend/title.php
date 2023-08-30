@@ -13,13 +13,31 @@
 					<td></td>
 				</tr>
 
-				<tr class="yel">
-					<td width="45%"></td>
-					<td width="23%"></td>
-					<td width="7%"></td>
-					<td width="7%"></td>
-					<td></td>
+				<?php
+					foreach($rows as $row){
+				?>
+
+				<tr >
+					<td width="45%">
+						<img src="./upload/<?=$row['img'];?>" style="width:300px;height:30px">
+					</td>
+					<td width="23%">
+						<input type="text" name="text[<?=$row['id'];?>]" value="<?=$row['text'];?>">
+					</td>
+					<td width="7%">
+						<input type="radio" name="sh" value="<?=$row['id'];?>" <?=($row['sh']==1)?'checked':'';?>>
+					</td>
+					<td width="7%">
+						<input type="checkbox" name="del[<?=$row['id'];?>]" value="<?=$row['id'];?>">
+					</td>
+					<td width="200px">
+						<input type="button" onclick="op('#cover','#cvr','<?=$updateModal;?>?id=<?=$row['id'];?>')" value="<?=$updateBtn;?>">
+					</td>	
 				</tr>
+
+				<?php
+					}
+				?>
 
 			</tbody>
 		</table>
