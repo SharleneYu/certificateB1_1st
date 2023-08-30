@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Taipei");
 
 //$BASEDIR=$_SERVER['DOCUMENT_ROOT'];  //這個適合伺服器只有單一網站
 

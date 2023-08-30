@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<?php include_once "base.php"; ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0068)?do=admin&redo=title -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -72,21 +74,39 @@
 						1 </span>
 				</div>
 			</div>
+			<div class="di" style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
+				<!--正中央-->
+				<table width="100%">
+					<tbody>
+						<tr>
+							<td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a>
+							</td>
+							<td><button onclick="document.cookie=&#39;user=&#39;;location.replace(&#39;?&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+						</tr>
+					</tbody>
+				</table>
+				<?php
+				$do = $_GET['do'] ?? 'title';
+				$file = "./view/backend/". $do .".php";
+				$table=ucfirst($do);
+				$$table->backend();
 
-			<?php
-				$do=$_GET['do']??'title';
-				$file="./view/backend/".$do.".php";
-				if(file_exists($file)){
+				if (file_exists($file)) {
 					include $file;
-				}else{
+				} else {
 					include "./view/backend/title.php";
 				}
-			?>
+				?>
+			</div>
+
 		</div>
+
 		<div style="clear:both;"></div>
+
 		<div style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
 			<span class="t" style="line-height:123px;"></span>
 		</div>
+
 	</div>
 
 </body>

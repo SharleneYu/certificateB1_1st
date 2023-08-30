@@ -111,9 +111,9 @@ class DB{
     }
 
 
-    //$path是路徑，$arg是相關參數的陣列
-    function view($path, $arg){
-        extract($arg);    //先解包，
+    //$path是路徑，$arg是相關參數的陣列 (允許是空值)
+    function view($path, $arg=[]){
+        extract($arg);    //先解包陣列，將裡面的參數供頁面使用
         include($path);   //引入$path來使用參數
     }
 
