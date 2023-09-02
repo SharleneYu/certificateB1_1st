@@ -1,42 +1,52 @@
-<?php
-include_once "../base.php";
+<?php include_once "../base.php";
+
+//$_POST裡有以下資料：$_POST['text'][]、$_POST['text'][]、$_POST['sh']
+
 $table=$_POST['table'];
 $db=ucfirst($table);
 
 $rows='';
 
-switch($table){
+//大部分的資料表都有text欄位，以default來處理，其他的各別處理：admin->acc, mvim & image->id
+switch($talbe){
     case "admin":
         $rows=$_POST['acc'];
-    break;
+        break;
     case "image":
     case "mvim":
         $rows=$_POST['id'];
-    break;
+        break;
     default:
         $rows=$_POST['text'];
 }
 
-foreach($rows as $id => $row){
-    if(isset($_POST['del']) && in_array($id,$_POST['del'])){
+//因為是多筆資料來源，所以用foreach處理
+foreach($rows as $id=>$row){
+    //如果傳值內容有del，且del[]中有id，代表要刪除整筆；若del[]中沒有id，代表要更新文字
+    if(isset($_POST['del']) && in_array($id, $_POST['del'])){
         $$db->del($id);
+    
     }else{
-        $data=$$db->find($id);
+        $data=$$db->find($id);  //查詢修改文字的id
 
         switch($table){
             case "title":
                 $data['text']=$row;
                 $data['sh']=($_POST['sh']==$id)?1:0;
-            break;
+                break;
+
             case "admin":
                 $data['acc']=$row;
                 $data['pw']=$_POST['pw'][$id];
-            break;
+                break;
+
             case "menu":
                 $data['text']=$row;
                 $data['href']=$_POST['href'][$id];
-                $data['sh']=(isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
-            break; 
+                $data['sh']=(isset($_POST['sh']) && in_array($id, $_POST['sh']))?1:0;
+                break;
+              
+            //沒text的會用id顯示
             default:
                 if(isset($_POST['text'])){
                     $data['text']=$row;

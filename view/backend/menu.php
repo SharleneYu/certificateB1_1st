@@ -6,10 +6,11 @@
 		<table width="100%">
 			<tbody>
 				<tr class="yel">
-					<td width="45%">網站標題</td>
-					<td width="23%">替代文字</td>
-					<td width="7%">顯示</td>
-					<td width="7%">刪除</td>
+					<td width="20%">主選單名稱</td>
+					<td width="40%">選單連結網址</td>
+					<td width="10%">次選單數</td>
+					<td width="10%">顯示</td>
+					<td width="10%">刪除</td>
 					<td></td>
 				</tr>
 
@@ -18,19 +19,21 @@
 				?>
 
 				<tr >
-					<td width="45%">
-						<img src="./upload/<?=$row['img'];?>" style="width:300px;height:30px">
-					</td>
-					<td width="23%">
+					<td width="20%">
 						<input type="text" name="text[<?=$row['id'];?>]" value="<?=$row['text'];?>">
 					</td>
-					<td width="7%">
-						<input type="radio" name="sh" value="<?=$row['id'];?>" <?=($row['sh']==1)?'checked':'';?>>
+					<td width="40%">
+						<input type="text" name="href[<?=$row['id'];?>]" value="<?=$row['href'];?>">					</td>
+					<td width="10%">
+						<?=$row['subs']?>
 					</td>
-					<td width="7%">
+					<td width="10%">
+						<input type="checkbox" name="sh[<?=$row['id'];?>]" value="<?=$row['id'];?>" <?=($row['sh']==1)?'checked':'';?>>
+					</td>
+					<td width="10%">
 						<input type="checkbox" name="del[<?=$row['id'];?>]" value="<?=$row['id'];?>">
 					</td>
-					<td width="200px">
+					<td >
 						<input type="button" onclick="op('#cover','#cvr','<?=$updateModal;?>?id=<?=$row['id'];?>')" value="<?=$updateBtn;?>">
 					</td>	
 				</tr>

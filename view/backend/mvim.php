@@ -1,34 +1,36 @@
-
-
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
 	<p class="t cent botli"><?= $header; ?></p>
-	<form method="post" action="./api/update.php">
+	<form method="post" action="/api/update.php">
 		<table width="100%">
 			<tbody>
 				<tr class="yel">
-					<td width="45%">網站標題</td>
-					<td width="23%">替代文字</td>
+					<td width="68%">動畫圖片</td>
 					<td width="7%">顯示</td>
 					<td width="7%">刪除</td>
 					<td></td>
 				</tr>
+
+
+
+
+
 
 				<?php
 					foreach($rows as $row){
 				?>
 
 				<tr >
-					<td width="45%">
-						<img src="./upload/<?=$row['img'];?>" style="width:300px;height:30px">
+					<td width="68%">
+						<!-- 因mvim, image沒有單選值，所以要塞一個id[]，讓下一站能知道要被修正的是哪個id -->
+						<img src="./upload/<?=$row['img'];?>" style="width:100px;height:100px">
+						<input type="hidden" name="id[<?=$row['id'];?>]" value="<?=$row['id'];?>">
 					</td>
-					<td width="23%">
-						<input type="text" name="text[<?=$row['id'];?>]" value="<?=$row['text'];?>">
+					
+					<td width="7%">
+						<input type="checkbox" name="sh[<?=$row['id'];?>]" value="<?=$row['id'];?>" <?=($row['sh']==1)?'checked':'';?>>
 					</td>
 					<td width="7%">
-						<input type="radio" name="sh" value="<?=$row['id'];?>" <?=($row['sh']==1)?'checked':'';?>>
-					</td>
-					<td width="7%">
-						<input type="checkbox" name="del[<?=$row['id'];?>]" value="<?=$row['id'];?>">
+						<input type="checkbox" name="del[<?=$row['id'];?>]" value="<?=$row['id'];?>">					
 					</td>
 					<td width="200px">
 						<input type="button" onclick="op('#cover','#cvr','<?=$updateModal;?>?id=<?=$row['id'];?>')" value="<?=$updateBtn;?>">
@@ -53,6 +55,5 @@
 				</tr>
 			</tbody>
 		</table>
-
 	</form>
 </div>
