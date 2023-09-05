@@ -22,8 +22,9 @@
 	</div>
 	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
-		<a title="" href="?">
-			<div class="ti" style="background:url('use/'); background-size:cover;"></div><!--標題-->
+		<a title="<?=$Title->show()['text'];?>" href="index.php">
+
+			<div class="ti" style="background:url('./upload/<?=$Title->show()['img'];?>'); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">

@@ -18,7 +18,10 @@ class Title extends DB{
         return $this->view('./view/backend/title.php', $view);
     }
 
-
+    function show(){
+        //將sh=1的資料撈出來, 存在$row。傳值是單筆陣列，要在前端使用時再加上['key']
+        return $this->find(['sh'=>1]);
+    }
 
 }
 

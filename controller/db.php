@@ -121,7 +121,7 @@ protected function math($math, $col, ...$arg){
     }
 
     //$num分頁筆數，$arg[]放其他相關條件
-    function paginate($num, $arg=[]){
+    function paginate($num, $arg=null){
         //算共有幾筆$total、要分成幾頁$pages
         $total=$this->count($arg);
         $pages=ceil($total/$num);
@@ -144,21 +144,22 @@ protected function math($math, $col, ...$arg){
 
     //
     function links(){
+        $html='';
         if($this->links['now']-1 >=1){
             $prev=$this->links['now']-1;
-            echo "<a href='?do=$this->table&p=$prev'>&lt;</a>";
+            $html.= "<a href='?do=$this->table&p=$prev'>&lt;</a>";
         }
 
         for($i=1; $i<=$this->links['pages'];$i++){
             $size=($this->links['now']==$i)?'24px':'18px';
-            echo "<a href='?do=$this->table&p=$i' style='font-size:$size'> $i </a>";
+            $html.= "<a href='?do=$this->table&p=$i' style='font-size:$size'> $i </a>";
         }
 
         if($this->links['now']+1 <= $this->links['pages']){
             $next=$this->links['now']+1;
-            echo "<a href='?do=?do=$this->table&p=$next'>&gt;</a>";
+            $html.= "<a href='?do=$this->table&p=$next'>&gt;</a>";
         }
-
+        return $html;
     }
 
 

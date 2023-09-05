@@ -18,6 +18,15 @@ class Ad extends DB{
         return $this->view('./view/backend/ad.php', $view);
     }
 
+    function show(){
+        //將sh=1的資料撈出來, 存在$rows
+        $rows = $this->all(['sh'=>1]);
+
+        //將撈出的陣列組成一個長字串。可用foreach，或用array_columns取出特定key的值、再join成長字串
+        $marquee = join(" &nbsp;&nbsp ", array_column($rows, 'text'));
+        return $marquee;
+
+    }
 
 
 }

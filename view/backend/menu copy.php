@@ -1,40 +1,40 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
 	<p class="t cent botli"><?= $header; ?></p>
-	<form method="post" target="back" action="/api/update.php">
+	<form method="post" action="./api/update.php">
 		<table width="100%">
 			<tbody>
 				<tr class="yel">
-					<td width="68%">動畫圖片</td>
-					<td width="7%">顯示</td>
-					<td width="7%">刪除</td>
+					<td width="20%">主選單名稱</td>
+					<td width="40%">選單連結網址</td>
+					<td width="10%">次選單數</td>
+					<td width="10%">顯示</td>
+					<td width="10%">刪除</td>
 					<td></td>
 				</tr>
-
-
-
-
-
 
 				<?php
 					foreach($rows as $row){
 				?>
 
 				<tr >
-					<td width="68%">
-						<!-- 因mvim, image沒有單選值，所以要塞一個id[]，讓下一站能知道要被修正的是哪個id -->
-						<img src="./upload/<?=$row['img'];?>" style="width:100px;height:100px">
-						<input type="hidden" name="id[<?=$row['id'];?>]" value="<?=$row['id'];?>">
+					<td width="20%">
+						<input type="text" name="text[<?=$row['id'];?>]" value="<?=$row['text'];?>">
 					</td>
-					
-					<td width="7%">
+					<td width="40%">
+						<input type="text" name="href[<?=$row['id'];?>]" value="<?=$row['href'];?>">					</td>
+					<td width="10%">
+						<?=$row['subs']?>
+					</td>
+					<td width="10%">
 						<input type="checkbox" name="sh[<?=$row['id'];?>]" value="<?=$row['id'];?>" <?=($row['sh']==1)?'checked':'';?>>
 					</td>
-					<td width="7%">
-						<input type="checkbox" name="del[<?=$row['id'];?>]" value="<?=$row['id'];?>">					
+					<td width="10%">
+						<input type="checkbox" name="del[<?=$row['id'];?>]" value="<?=$row['id'];?>">
 					</td>
-					<td width="200px">
+					<td >
 						<input type="button" onclick="op('#cover','#cvr','<?=$updateModal;?>?id=<?=$row['id'];?>')" value="<?=$updateBtn;?>">
 					</td>	
+
 				</tr>
 
 				<?php
@@ -46,7 +46,8 @@
 		<table style="margin-top:40px; width:70%;">
 			<tbody>
 				<tr>
-					<td width="200px"><input type="button" onclick="op('#cover','#cvr','<?=$modal;?>')" value="<?=$addBtn;?>"></td>
+					<td width="200px"><input type="button" onclick="op('#cover','#cvr','<?=$modal;?>?id=<?=$row['id'];?>')" value="<?=$addBtn;?>"></td>
+	
 					<td class="cent">
 						<input type="hidden" name="table" value='<?=$table;?>'>
 						<input type="submit" value="修改確定">
@@ -55,5 +56,6 @@
 				</tr>
 			</tbody>
 		</table>
+
 	</form>
 </div>
