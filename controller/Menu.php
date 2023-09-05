@@ -31,10 +31,19 @@ class Menu extends DB{
     }
 
     
-   
+   function show(){
+        //先撈出主選單的資料陣列存在$rows (main_id=0)
+        $rows=$this->all(['main_id'=>0]);
+        // 在每個主選單裡再塞入次選單的資料
+        foreach($rows as $idx=>$row){
+            //撈出符合$row['id']主選單條件的次選單資料陣列，存入$row['subs']
+            $row['subs']=$this->all(['main_id'=>$row['id']]);
+            $rows[$idx]=$row;
+        }
+        return $rows;
+    }
         
     
-
 
 
 }

@@ -19,9 +19,20 @@ class Image extends DB{
         return $this->view('./view/backend/image.php', $view);
     }
 
+    function num(){
+        return $this->count(['sh'=>1]);
+    }
 
+    function show(){
+        //將sh=1的資料撈出來, 存在$rows
+        $rows = $this->all(['sh'=>1]);
 
+        foreach($rows as $idx => $row){
+            ?>
+                <div class="im" id="ssaa<?=$idx;?>">
+                    <img src="./upload/<?=$row['img'];?>" style="width:150px; height:103px;">
+                </div>
+            <?php
+        }
+    }
 }
-
-
-?>

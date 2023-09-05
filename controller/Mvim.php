@@ -20,6 +20,21 @@ class Mvim extends DB{
         return $this->view('./view/backend/mvim.php', $view);
     }
 
+    function show(){
+        //將sh=1的資料撈出來, 存在$rows
+        $rows = $this->all(['sh'=>1]);
+
+        foreach($rows as $row){
+            //每則影片都要執行以下處理
+            ?>
+
+                lin.push(".upload/<?=$row['img'];?>");
+
+            <?php
+
+        }
+
+    }
 
 }
 
