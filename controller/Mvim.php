@@ -27,9 +27,7 @@ class Mvim extends DB{
         foreach($rows as $row){
             //每則影片都要執行以下處理
             ?>
-
-                lin.push(".upload/<?=$row['img'];?>");
-
+                lin.push("./upload/<?=$row['img'];?>");
             <?php
 
         }

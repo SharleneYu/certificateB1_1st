@@ -51,16 +51,23 @@
 				<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=admin&#39;)">管理登入</button>
 				<div style="width:89%; height:480px;" class="dbor">
 					<span class="t botli">校園映象區</span>
+					<div onclick="pp(1)" class="cent"><img src="./icon/up.jpg" alt=""></div>
+					<div  class="cent"><?php $Image->show();?></div>
+					<div onclick="pp(2)" class="cent"><img src="./icon/dn.jpg" alt=""></div>
+
+					
 					<script>
 						var nowpage = 0,
-							num = 0;
+							num = <?=$Image->num();?>;
 
 						function pp(x) {
 							var s, t;
 							if (x == 1 && nowpage - 1 >= 0) {
 								nowpage--;
 							}
+							// 老師做法會改js，使可點下6次；SYU偷懶做法可以點3次
 							if (x == 2 && (nowpage + 1) * 3 <= num * 1 + 3) {
+							// if (x ==2 && nowpage < (num-3)){
 								nowpage++;
 							}
 							$(".im").hide()

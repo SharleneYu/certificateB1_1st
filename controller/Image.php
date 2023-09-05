@@ -30,7 +30,7 @@ class Image extends DB{
         foreach($rows as $idx => $row){
             ?>
                 <div class="im" id="ssaa<?=$idx;?>">
-                    <img src="./upload/<?=$row['img'];?>" style="width:150px; height:103px;">
+                    <img src="./upload/<?=$row['img'];?>" style="width:150px; height:103px; border: 3px solid orange; margin:2px;">
                 </div>
             <?php
         }
