@@ -52,4 +52,7 @@ function q($sql){
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
+$Total->online();
+
+
 ?>

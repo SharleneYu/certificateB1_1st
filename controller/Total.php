@@ -21,6 +21,19 @@ class Total extends DB{
         return $this->find(1)['total'];
     }
 
+    function online(){
+        // 若$_SESSION['online']不存在，total+1
+        if(!isset($_SESSION['online'])){
+            $total=$this->find(1);
+            $total['total']++;
+            $this->save($total);
+            $_SESSION['online']=1;
+        }
+    
+    }
+
+
+
 }
 
 
